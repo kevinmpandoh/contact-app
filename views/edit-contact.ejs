@@ -1,0 +1,44 @@
+<div class="constiner mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Form Edit Contact</h2>
+
+            <% if (typeof errors != "undefined") { %>
+            <div class="alert alert-danger">
+                <ul>
+                    <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+            <% } %>
+
+            <form action="/contact?_method=PUT" method="post">
+                <input type="hidden" name="_id" value="<%= contact._id %>">
+                <input type="hidden" name="oldNama" value="<%= contact.oldNama || contact.nama %>">
+                <div class="mb-3 row mt-4">
+                    <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama" name="nama" value="<%= contact.nama %>">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="noHP" class="col-sm-2 col-form-label">No.HP</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="noHP" name="nohp" value="<%= contact.nohp %>">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" value="<%= contact.email %>">
+                    </div>
+                </div>
+                <a href="/contact" class="btn btn-danger"><i class="bi bi-arrow-left"></i> Kembali</a>
+
+                <button type="submit" class="btn btn-success"><i class="bi bi-pencil"></i> Edit</button>
+            </form>
+
+        </div>
+    </div>
+</div>

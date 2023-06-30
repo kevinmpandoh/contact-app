@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="mt-4">Daftar Contact</h1>
+
+            <a href="/contact/add" class="btn btn-primary mb-3 mt-4"><i class="bi bi-plus"></i> Tambah Contact</a>
+
+            <% if (msg.length !== 0) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= msg %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">No. HP</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% if (contacts.length === 0) { %>
+                    <tr>
+                        <td colspan="4">
+                            <div class="alert alert-danger fw-bold" role="alert">
+                                Data contact belum ada.
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                    <% contacts.forEach((contact, i) => { %>
+                    <tr>
+                        <th scope="row"><%= ++i %></th>
+                        <td><%= contact.nama %></td>
+                        <td><%= contact.nohp %></td>
+                        <td><%= contact.email %></td>
+                        <td>
+                            <a href="/contact/<%= contact._id %>" class="btn btn-warning btn-sm">
+                                <i class="bi bi-info-circle"></i> Detail
+                            </a>
+                            <a href="/contact/edit/<%= contact._id %>" class="btn btn-success btn-sm rounded-pil"><i
+                                    class="bi bi-pencil"></i> Edit</a>
+                            <form action="/contact?_method=DELETE" method="post" class="d-inline">
+                                <input type="hidden" name="_id" value="<%= contact.id %>">
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Anda yakin ingin menghapusnya?')"><i
+                                        class="bi bi-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
